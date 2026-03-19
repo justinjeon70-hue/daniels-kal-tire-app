@@ -1,0 +1,8 @@
+{
+  "name": "daniels-kal-tire-thriving-plan",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js"
+  }
+}
