@@ -1882,7 +1882,7 @@
         iconClass: 'morning',
         pitMsg: '"Copy Daniel, formation lap complete. Excellent start. Stay on this strategy." \u2014 PIT WALL',
         items: [
-          { id: 'm1', label: 'Wake up on time (alarm, no snooze!)', detail: 'Put phone across the room so you HAVE to get up', time: '6:30 AM', xp: 10 },
+          { id: 'm1', label: 'Wake up on time (alarm, no snooze!)', detail: 'Put phone across the room so you HAVE to get up', time: '6:00 AM', xp: 10 },
           { id: 'm2', label: 'Make your bed', detail: 'First win of the day. Takes 60 seconds.', xp: 5 },
           { id: 'm3', label: 'Shower & get dressed for work', detail: 'Full uniform ready, name tag on', xp: 5 },
           { id: 'm4', label: 'Eat a real breakfast', detail: 'Protein + carbs = energy for tire lifting', xp: 10 },
@@ -1920,7 +1920,7 @@
           { id: 'e1', label: '30+ min workout or physical activity', detail: 'Gym, run, calisthenics, basketball \u2014 just move', xp: 20 },
           { id: 'e2', label: 'Stretch for 10 minutes', detail: 'Your back and knees will thank you (tire lifting!)', xp: 10 },
           { id: 'e3', label: 'Drink 6+ glasses of water today', detail: 'Dehydration kills focus. Keep a bottle on you.', xp: 10 },
-          { id: 'e4', label: 'No energy drinks today', detail: 'Real food > caffeine crashes. ADHD + stimulants = chaos.', xp: 10 },
+          { id: 'e4', label: 'No energy drinks today', detail: 'Real food > caffeine crashes. Superpower + stimulants = chaos.', xp: 10 },
         ]
       },
       {
@@ -1931,7 +1931,7 @@
         iconClass: 'evening',
         pitMsg: '"Daniel, great cooldown. Engine temps nominal. We go again tomorrow. Rest up." \u2014 PIT WALL',
         items: [
-          { id: 'ev1', label: 'Prep tomorrow\'s clothes & lunch', detail: 'Remove morning decision fatigue. ADHD superpower.', xp: 10 },
+          { id: 'ev1', label: 'Prep tomorrow\'s clothes & lunch', detail: 'Remove morning decision fatigue. Superpower superpower.', xp: 10 },
           { id: 'ev2', label: 'Review tomorrow\'s schedule', detail: 'Know your shift time, plan your morning', xp: 5 },
           { id: 'ev3', label: 'Screens off by 10:30 PM', detail: 'Phone in another room. Blue light destroys sleep.', time: '10:30 PM', xp: 15 },
           { id: 'ev4', label: 'In bed by 11:00 PM', detail: 'You need 7-8 hours. This is non-negotiable.', time: '11:00 PM', xp: 15 },
@@ -1940,14 +1940,14 @@
       },
       {
         id: 'mindset',
-        title: 'ADHD Power Moves',
+        title: 'Superpower Moves',
         subtitle: 'DRS Zone \u2014 Overtake Mode',
         icon: '\u{1F9E0}',
         iconClass: 'mindset',
-        pitMsg: '"DRS activated. Massive pace advantage Daniel. Using that ADHD energy perfectly." \u2014 RACE ENGINEER',
+        pitMsg: '"DRS activated. Massive pace advantage Daniel. Using that Superpower energy perfectly." \u2014 RACE ENGINEER',
         items: [
           { id: 'ad1', label: 'Use a timer for tasks (Pomodoro)', detail: '25 min on, 5 min break. Works magic for focus.', xp: 10 },
-          { id: 'ad2', label: 'Write down 3 things to do (max 3!)', detail: 'ADHD overwhelm hack: tiny lists only', xp: 10 },
+          { id: 'ad2', label: 'Write down 3 things to do (max 3!)', detail: 'Superpower overwhelm hack: tiny lists only', xp: 10 },
           { id: 'ad3', label: 'Took breaks when needed (no guilt)', detail: 'Breaks aren\'t laziness. They\'re strategy.', xp: 5 },
           { id: 'ad4', label: 'Didn\'t beat myself up over mistakes', detail: 'Progress > perfection. Always.', xp: 10 },
           { id: 'ad5', label: 'One thing for CarbonForgeX or photography', detail: 'Even 15 min: edit a photo, reply to a DM, sketch a design', xp: 15 },
@@ -1985,7 +1985,7 @@
       { text: "Intel from the pit wall: seasonal drivers who show up early and stay late don't stay seasonal. Be impossible to replace.", from: 'GP (RED BULL)', to: 'DANIEL' },
       { text: "Carbon for strength. Forge for the process. X for what's next. That's the team motto and we're living it.", from: 'CHRISTIAN HORNER', to: 'DANIEL' },
       { text: "The mechanical knowledge feeds the photography. The photography builds the brand. Everything is compounding. Trust the strategy.", from: 'BONO (MERCEDES)', to: 'DANIEL' },
-      { text: "ADHD isn't a penalty, Daniel. Hyperfocus on a brake job? That's DRS activated. Channel that energy.", from: 'XAVI (FERRARI)', to: 'DANIEL' },
+      { text: "Superpower isn't a penalty, Daniel. Hyperfocus on a brake job? That's DRS activated. Channel that energy.", from: 'XAVI (FERRARI)', to: 'DANIEL' },
       { text: "Long-term strategy update: 2036 target \u2014 own a performance shop, national brand, published photographer, competitive drifter. Today's shift is Lap 1.", from: 'TOTO WOLFF', to: 'DANIEL' },
       { text: "Pit wall update: 11 hoodies sold at $80+ with ZERO advertising budget. Imagine when you actually deploy the marketing strategy.", from: 'FRED VASSEUR', to: 'DANIEL' },
       { text: "Remember Daniel, you're not just changing tires out there. You're logging hours toward your apprenticeship. Every hour counts.", from: 'GP (RED BULL)', to: 'DANIEL' },
@@ -2426,7 +2426,7 @@
       { id:'work-10', name:'Shop Floor Hero', emoji:'\u{1F527}', f1:'Pit Crew Elite', desc:'All work tasks 10x', cat:'section', cond: h=>(h.secPerfects.work||0)>=10 },
       { id:'morning-10', name:'Early Bird', emoji:'\u{1F305}', f1:'Lights Out Master', desc:'All morning tasks 10x', cat:'section', cond: h=>(h.secPerfects.morning||0)>=10 },
       { id:'exercise-10', name:'Machine', emoji:'\u{1F3CB}\u{FE0F}', f1:'Physical Peak', desc:'All exercise tasks 10x', cat:'section', cond: h=>(h.secPerfects.exercise||0)>=10 },
-      { id:'mindset-10', name:'DRS Master', emoji:'\u{1F9E0}', f1:'Overtake Specialist', desc:'ADHD moves 10x', cat:'section', cond: h=>(h.secPerfects.mindset||0)>=10 },
+      { id:'mindset-10', name:'DRS Master', emoji:'\u{1F9E0}', f1:'Overtake Specialist', desc:'Superpower moves 10x', cat:'section', cond: h=>(h.secPerfects.mindset||0)>=10 },
       // Special
       { id:'first-lap', name:'First Lap', emoji:'\u{1F6A6}', f1:'Formation Lap', desc:'Complete first task', cat:'special', cond: h=>h.totalTasks>=1 },
       { id:'night-owl', name:'Night Owl', emoji:'\u{1F319}', f1:'Night Race', desc:'Complete evening section', cat:'special', cond: h=>(h.secPerfects.evening||0)>=1 },
@@ -3528,7 +3528,7 @@
 
       // Build calendar events for tasks with times
       const timedTasks = [
-        { label: 'Wake up on time', hour: 6, min: 30 },
+        { label: 'Wake up on time', hour: 6, min: 0 },
         { label: 'Leave 15 min early for work', hour: 7, min: 15 },
         { label: 'Screens off by 10:30 PM', hour: 22, min: 30 },
         { label: 'In bed by 11:00 PM', hour: 23, min: 0 },
@@ -3536,11 +3536,11 @@
 
       // Morning block
       const blocks = [
-        { name: 'Morning Launch Sequence', start: '063000', end: '073000', desc: 'Wake up, breakfast, prep, leave early' },
+        { name: 'Morning Launch Sequence', start: '060000', end: '071500', desc: 'Wake up, breakfast, prep, leave early' },
         { name: 'Kal Tire Shift - DOMINATE', start: '073000', end: '163000', desc: 'Arrive early, zero phone, volunteer, learn, clean bay, be grateful' },
         { name: 'Body Maintenance - Pit Stop', start: '170000', end: '180000', desc: '30 min workout + stretching + hydration' },
         { name: 'Evening Wind-Down - Cooldown Lap', start: '200000', end: '223000', desc: 'Prep tomorrow, review schedule, screens off by 10:30' },
-        { name: 'ADHD Power Moves - DRS Zone', start: '183000', end: '200000', desc: 'Pomodoro timer, write 3 tasks, take breaks, CarbonForgeX time' },
+        { name: 'Superpower Moves - DRS Zone', start: '183000', end: '200000', desc: 'Pomodoro timer, write 3 tasks, take breaks, CarbonForgeX time' },
       ];
 
       // Build .ics content
