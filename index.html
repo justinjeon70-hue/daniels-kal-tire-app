@@ -1582,6 +1582,159 @@
       margin-top: 4px; letter-spacing: 1px;
     }
 
+    /* === REWARD SHOP === */
+    .coin-display {
+      display: flex; align-items: center; gap: 6px;
+      font-family: 'Orbitron', monospace;
+      font-size: 13px; font-weight: 700;
+      color: var(--yellow);
+      cursor: pointer;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: rgba(255,214,0,0.08);
+      border: 1px solid rgba(255,214,0,0.2);
+      transition: all 0.3s;
+    }
+    .coin-display:hover { border-color: var(--yellow); box-shadow: 0 0 12px var(--yellow-glow); }
+    .coin-icon { font-size: 16px; }
+    .coin-amount { min-width: 30px; text-align: right; }
+    .coin-earn {
+      position: fixed; z-index: 1600; pointer-events: none;
+      font-family: 'Orbitron', monospace; font-size: 16px; font-weight: 800;
+      color: var(--yellow); text-shadow: 0 0 8px var(--yellow-glow);
+      animation: coinFloat 1.2s ease-out forwards;
+    }
+    @keyframes coinFloat {
+      0% { opacity: 1; transform: translateY(0) scale(1); }
+      60% { opacity: 1; transform: translateY(-40px) scale(1.2); }
+      100% { opacity: 0; transform: translateY(-70px) scale(0.8); }
+    }
+
+    .reward-shop-btn {
+      display: flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, rgba(255,214,0,0.1), rgba(255,107,43,0.1));
+      border: 1px solid rgba(255,214,0,0.25);
+      border-radius: 14px;
+      padding: 12px 16px;
+      cursor: pointer; transition: all 0.3s;
+      margin-bottom: 12px;
+    }
+    .reward-shop-btn:hover { border-color: var(--yellow); box-shadow: 0 0 16px var(--yellow-glow); transform: translateY(-1px); }
+    .reward-shop-btn .shop-icon { font-size: 22px; }
+    .reward-shop-btn .shop-text { flex: 1; }
+    .reward-shop-btn .shop-title { font-size: 14px; font-weight: 700; color: var(--text); }
+    .reward-shop-btn .shop-subtitle { font-family: 'Orbitron', monospace; font-size: 8px; color: var(--yellow); letter-spacing: 2px; margin-top: 2px; }
+
+    .shop-overlay {
+      position: fixed; inset: 0; z-index: 1900;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.88); backdrop-filter: blur(12px);
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+      overflow-y: auto;
+    }
+    .shop-overlay.show { opacity: 1; pointer-events: auto; }
+
+    .shop-content {
+      width: 92%; max-width: 480px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 20px;
+      max-height: 88vh; overflow-y: auto;
+      position: relative;
+    }
+
+    .shop-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .shop-header-left { display: flex; align-items: center; gap: 10px; }
+    .shop-header-icon { font-size: 28px; }
+    .shop-header-title { font-family: 'Racing Sans One', cursive; font-size: 22px; color: var(--yellow); }
+    .shop-header-sub { font-family: 'Orbitron', monospace; font-size: 8px; color: var(--text-dim); letter-spacing: 2px; }
+
+    .shop-balance {
+      text-align: center; padding: 8px 16px;
+      background: rgba(255,214,0,0.06); border: 1px solid rgba(255,214,0,0.15);
+      border-radius: 12px; font-family: 'Orbitron', monospace;
+    }
+    .shop-balance-amount { font-size: 24px; font-weight: 800; color: var(--yellow); }
+    .shop-balance-label { font-size: 8px; color: var(--text-dim); letter-spacing: 2px; margin-top: 2px; }
+
+    .shop-section-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 9px; color: var(--text-dim);
+      letter-spacing: 2px; margin: 16px 0 8px;
+      padding-bottom: 4px; border-bottom: 1px solid var(--border);
+    }
+
+    .reward-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+    .reward-card {
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px; text-align: center;
+      transition: all 0.3s; cursor: pointer;
+      position: relative; overflow: hidden;
+    }
+    .reward-card:hover:not(.locked):not(.redeemed) { border-color: var(--yellow); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(255,214,0,0.15); }
+    .reward-card.locked { opacity: 0.35; cursor: default; }
+    .reward-card.redeemed { opacity: 0.5; border-color: var(--green); }
+    .reward-card.redeemed::after {
+      content: '✓ REDEEMED'; position: absolute; top: 8px; right: -24px;
+      background: var(--green); color: #000; font-family: 'Orbitron', monospace;
+      font-size: 6px; font-weight: 800; letter-spacing: 1px;
+      padding: 2px 30px; transform: rotate(35deg);
+    }
+
+    .reward-emoji { font-size: 32px; margin-bottom: 6px; }
+    .reward-name { font-size: 11px; font-weight: 700; line-height: 1.3; color: var(--text); }
+    .reward-desc { font-size: 9px; color: var(--text-dim); margin-top: 4px; line-height: 1.3; }
+    .reward-cost {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 8px; padding: 3px 10px;
+      border-radius: 20px; font-family: 'Orbitron', monospace;
+      font-size: 10px; font-weight: 700;
+      background: rgba(255,214,0,0.1); color: var(--yellow);
+      border: 1px solid rgba(255,214,0,0.2);
+    }
+    .reward-card.locked .reward-cost { background: rgba(255,255,255,0.05); color: var(--text-dim); border-color: var(--border); }
+
+    .redeem-confirm {
+      margin-top: 12px; padding: 8px 14px;
+      background: linear-gradient(135deg, var(--yellow), var(--neon-orange));
+      color: #000; border: none; border-radius: 8px;
+      font-family: 'Orbitron', monospace; font-size: 9px; font-weight: 700;
+      letter-spacing: 1px; cursor: pointer; transition: all 0.2s;
+      display: none;
+    }
+    .reward-card.selected .redeem-confirm { display: inline-block; }
+    .redeem-confirm:hover { transform: scale(1.05); }
+
+    .shop-history-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 9px; color: var(--green);
+      letter-spacing: 2px; margin: 20px 0 8px;
+      padding-bottom: 4px; border-bottom: 1px solid rgba(0,230,118,0.15);
+    }
+    .shop-history-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
+      font-size: 11px;
+    }
+    .shop-history-item .emoji { font-size: 16px; }
+    .shop-history-item .name { flex: 1; font-weight: 600; }
+    .shop-history-item .date { font-family: 'Orbitron', monospace; font-size: 8px; color: var(--text-dim); }
+
+    /* Coin summary badges in summaries */
+    .summary-coins-bar {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: rgba(255,214,0,0.06); border: 1px solid rgba(255,214,0,0.15);
+      border-radius: 10px; padding: 8px 14px; margin: 10px 0;
+      font-family: 'Orbitron', monospace;
+    }
+    .summary-coins-icon { font-size: 18px; }
+    .summary-coins-amount { font-size: 16px; font-weight: 800; color: var(--yellow); }
+    .summary-coins-label { font-size: 8px; color: var(--text-dim); letter-spacing: 2px; }
+
     /* === MILESTONES === */
     .milestone-item {
       padding: 12px 16px;
@@ -1704,6 +1857,13 @@
       </div>
     </div>
 
+    <!-- Coin Display (inline with stats) -->
+    <div class="coin-display" onclick="openShop()" title="Open Reward Pit Stop" style="margin: 0 auto 10px; width: fit-content;">
+      <span class="coin-icon">🪙</span>
+      <span class="coin-amount" id="coinCount">0</span>
+      <span style="font-size:8px;color:var(--text-dim);letter-spacing:1px">PIT COINS</span>
+    </div>
+
     <!-- Tire Compound Indicator -->
     <div class="tire-compounds" id="tireCompounds">
       <div class="compound soft" id="compSoft">
@@ -1758,6 +1918,19 @@
       <div class="speedo-label" id="speedoSub">Engine cold &mdash; fire it up!</div>
       <div class="speedo-message" id="speedoMsg"></div>
       <div class="drs-zone" id="drsZone">DRS ENABLED</div>
+    </div>
+
+    <!-- Reward Shop Button -->
+    <div class="reward-shop-btn" onclick="openShop()">
+      <div class="shop-icon">🏪</div>
+      <div class="shop-text">
+        <div class="shop-title">Reward Pit Stop</div>
+        <div class="shop-subtitle">SPEND YOUR PIT COINS</div>
+      </div>
+      <div class="coin-display" style="margin:0;cursor:pointer">
+        <span class="coin-icon">🪙</span>
+        <span class="coin-amount" id="coinCountShop">0</span>
+      </div>
     </div>
 
     <!-- Race Debrief Buttons -->
@@ -1871,6 +2044,11 @@
       <div class="checkered-finish"></div>
       <button class="celebration-close" onclick="closeCelebration()">VICTORY LAP</button>
     </div>
+  </div>
+
+  <!-- Reward Shop Overlay -->
+  <div class="shop-overlay" id="shopOverlay">
+    <div class="shop-content" id="shopContent"></div>
   </div>
 
   <!-- Summary Overlay -->
@@ -2764,11 +2942,28 @@
         commentary = generateCommentary(avgPct, 'monthly');
       }
 
+      // Calculate coins earned in period
+      const coinLog = history.coinLog || [];
+      let periodCoins = 0;
+      const now = new Date();
+      if (type === 'daily') {
+        periodCoins = coinLog.filter(c => c.date === getTodayStr()).reduce((s, c) => s + c.amount, 0);
+      } else if (type === 'weekly') {
+        const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate() - 7);
+        periodCoins = coinLog.filter(c => new Date(c.date) >= weekAgo).reduce((s, c) => s + c.amount, 0);
+      } else {
+        const monthAgo = new Date(); monthAgo.setDate(monthAgo.getDate() - 30);
+        periodCoins = coinLog.filter(c => new Date(c.date) >= monthAgo).reduce((s, c) => s + c.amount, 0);
+      }
+
+      const coinsHtml = `<div class="summary-coins-bar"><span class="summary-coins-icon">🪙</span><span class="summary-coins-amount">${periodCoins}</span><span class="summary-coins-label">COINS EARNED</span><span style="margin-left:auto;font-size:9px;color:var(--text-dim)">Balance: ${getCoins()}</span></div>`;
+
       content.innerHTML = `
         <button class="summary-close" onclick="closeSummary()">&times;</button>
         <div class="summary-title">${title}</div>
         <div class="summary-subtitle">${subtitle}</div>
         ${statsHtml}
+        ${coinsHtml}
         <div class="summary-chart-container">
           <div class="summary-chart-title">${chartTitle}</div>
           <canvas class="summary-chart-canvas" id="summaryChart"></canvas>
@@ -2960,6 +3155,201 @@
       if (soundEnabled) playCheckBeep();
     }
 
+    // ===== REWARD / COIN SYSTEM =====
+    const REWARDS = [
+      // Tier 1: Small treats (25-75 coins)
+      { id: 'snack', name: 'Pit Stop Snack', emoji: '🍕', desc: 'Choose any snack or treat', cost: 25, tier: 1 },
+      { id: 'music', name: 'New Song Download', emoji: '🎵', desc: 'Download a new song or album', cost: 30, tier: 1 },
+      { id: 'sleep-in', name: 'Sleep-In Pass', emoji: '😴', desc: '30 extra min sleep on a day off', cost: 40, tier: 1 },
+      { id: 'game-time', name: 'Game Time', emoji: '🎮', desc: '1 hour extra gaming, guilt-free', cost: 50, tier: 1 },
+      // Tier 2: Medium rewards (100-200 coins)
+      { id: 'takeout', name: 'Takeout Night', emoji: '🍔', desc: 'Order from your fav restaurant', cost: 100, tier: 2 },
+      { id: 'movie', name: 'Movie Night', emoji: '🎬', desc: 'Movie + snacks combo', cost: 100, tier: 2 },
+      { id: 'car-wash', name: 'Car Detail', emoji: '🚗', desc: 'Full car wash & detail', cost: 125, tier: 2 },
+      { id: 'new-music', name: 'Spotify Premium', emoji: '🎧', desc: '1 month music streaming', cost: 150, tier: 2 },
+      // Tier 3: Big rewards (300-500 coins)
+      { id: 'hoodie', name: 'New Gear', emoji: '🧥', desc: 'New hoodie, shoes, or clothes', cost: 300, tier: 3 },
+      { id: 'car-part', name: '240SX Part Fund', emoji: '🔧', desc: '$50 toward a 240SX part', cost: 350, tier: 3 },
+      { id: 'photo-gear', name: 'Photography Gear', emoji: '📸', desc: 'New lens, filter, or accessory', cost: 400, tier: 3 },
+      { id: 'day-off', name: 'Full Day Off', emoji: '🏖️', desc: 'A guilt-free zero-task day', cost: 500, tier: 3 },
+      // Tier 4: Epic rewards (750+ coins)
+      { id: 'drift-day', name: 'Drift Experience', emoji: '🏎️', desc: 'Book a drift day or go-kart session', cost: 750, tier: 4 },
+      { id: 'carbonforge-boost', name: 'CarbonForgeX Boost', emoji: '🚀', desc: 'Invest $100 in CarbonForgeX stock/materials', cost: 1000, tier: 4 },
+    ];
+
+    const TIER_NAMES = { 1: 'PIT LANE — QUICK STOPS', 2: 'PODIUM — MEDIUM REWARDS', 3: 'CHAMPIONSHIP — BIG WINS', 4: 'WORLD CHAMPION — EPIC REWARDS' };
+
+    // Coin earning rates
+    const COIN_RATES = {
+      taskComplete: 1,        // 1 coin per task
+      sectionComplete: 5,     // Bonus: complete a section
+      perfectDay: 25,         // Bonus: 100% day
+      streakBonus3: 10,       // Every 3-day streak milestone
+      streakBonus7: 25,       // 7-day streak
+      streakBonus14: 50,      // 14-day streak
+      streakBonus30: 100,     // 30-day streak
+    };
+
+    function getCoins() { return history.coins || 0; }
+    function setCoins(n) { history.coins = n; saveHistory(); updateCoinDisplays(); }
+    function addCoins(n, source) {
+      history.coins = (history.coins || 0) + n;
+      // Track coin history
+      if (!history.coinLog) history.coinLog = [];
+      history.coinLog.push({ amount: n, source, date: getTodayStr(), ts: Date.now() });
+      if (history.coinLog.length > 200) history.coinLog = history.coinLog.slice(-200);
+      saveHistory();
+      updateCoinDisplays();
+      return n;
+    }
+
+    function spendCoins(n) {
+      if ((history.coins || 0) < n) return false;
+      history.coins -= n;
+      saveHistory();
+      updateCoinDisplays();
+      return true;
+    }
+
+    function updateCoinDisplays() {
+      const c = getCoins();
+      const el1 = document.getElementById('coinCount');
+      const el2 = document.getElementById('coinCountShop');
+      if (el1) el1.textContent = c;
+      if (el2) el2.textContent = c;
+    }
+
+    function showCoinEarn(amount, x, y) {
+      const el = document.createElement('div');
+      el.className = 'coin-earn';
+      el.textContent = '+' + amount + ' 🪙';
+      el.style.left = (x || window.innerWidth / 2) + 'px';
+      el.style.top = (y || 200) + 'px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1300);
+    }
+
+    function earnCoinsForTask(evt) {
+      const coins = addCoins(COIN_RATES.taskComplete, 'Task completed');
+      if (evt) {
+        const rect = evt.target.getBoundingClientRect();
+        showCoinEarn(coins, rect.left + rect.width / 2, rect.top);
+      }
+    }
+
+    function earnCoinsForSection(sectionId) {
+      addCoins(COIN_RATES.sectionComplete, 'Section: ' + sectionId);
+      showCoinEarn(COIN_RATES.sectionComplete, window.innerWidth / 2, 180);
+    }
+
+    function earnCoinsForPerfectDay() {
+      addCoins(COIN_RATES.perfectDay, 'Perfect day!');
+      showCoinEarn(COIN_RATES.perfectDay, window.innerWidth / 2, 150);
+    }
+
+    function checkStreakCoinBonus(streak) {
+      const bonuses = [
+        { s: 30, coins: COIN_RATES.streakBonus30 },
+        { s: 14, coins: COIN_RATES.streakBonus14 },
+        { s: 7, coins: COIN_RATES.streakBonus7 },
+        { s: 3, coins: COIN_RATES.streakBonus3 },
+      ];
+      for (const b of bonuses) {
+        if (streak === b.s) {
+          addCoins(b.coins, streak + '-day streak bonus');
+          showCoinEarn(b.coins, window.innerWidth / 2, 120);
+          break;
+        }
+      }
+    }
+
+    // Shop rendering
+    function openShop() {
+      const overlay = document.getElementById('shopOverlay');
+      const content = document.getElementById('shopContent');
+      if (soundEnabled) playRadioClick();
+
+      const redeemed = history.redeemedRewards || [];
+      const coins = getCoins();
+
+      let html = '<button class="summary-close" onclick="closeShop()">&times;</button>';
+      html += '<div class="shop-header"><div class="shop-header-left"><div class="shop-header-icon">🏪</div><div><div class="shop-header-title">Reward Pit Stop</div><div class="shop-header-sub">EARN COINS • CLAIM REWARDS</div></div></div></div>';
+      html += '<div class="shop-balance"><div class="shop-balance-amount">🪙 ' + coins + '</div><div class="shop-balance-label">PIT COINS BALANCE</div></div>';
+
+      // Coin earning info
+      html += '<div class="shop-section-title">💰 HOW TO EARN COINS</div>';
+      html += '<div style="font-size:11px;color:var(--text-dim);padding:4px 0 8px;line-height:1.6">';
+      html += '🪙 <b>+1</b> per task completed<br>';
+      html += '🪙 <b>+5</b> complete an entire section<br>';
+      html += '🪙 <b>+25</b> perfect day (100%)<br>';
+      html += '🪙 <b>+10/25/50/100</b> streak bonuses (3/7/14/30 days)';
+      html += '</div>';
+
+      // Reward tiers
+      [1, 2, 3, 4].forEach(tier => {
+        const tierRewards = REWARDS.filter(r => r.tier === tier);
+        html += '<div class="shop-section-title">' + TIER_NAMES[tier] + '</div>';
+        html += '<div class="reward-grid">';
+        tierRewards.forEach(r => {
+          const isRedeemed = redeemed.some(rd => rd.id === r.id && rd.date === getTodayStr());
+          const canAfford = coins >= r.cost;
+          const cls = isRedeemed ? 'redeemed' : (!canAfford ? 'locked' : '');
+          html += '<div class="reward-card ' + cls + '" data-reward="' + r.id + '" ' + (canAfford && !isRedeemed ? 'onclick="redeemReward(\'' + r.id + '\')"' : '') + '>';
+          html += '<div class="reward-emoji">' + r.emoji + '</div>';
+          html += '<div class="reward-name">' + r.name + '</div>';
+          html += '<div class="reward-desc">' + r.desc + '</div>';
+          html += '<div class="reward-cost">🪙 ' + r.cost + '</div>';
+          html += '</div>';
+        });
+        html += '</div>';
+      });
+
+      // Redemption history
+      if (redeemed.length > 0) {
+        html += '<div class="shop-history-title">✅ REDEMPTION HISTORY</div>';
+        redeemed.slice(-10).reverse().forEach(rd => {
+          const reward = REWARDS.find(r => r.id === rd.id);
+          if (reward) {
+            html += '<div class="shop-history-item"><span class="emoji">' + reward.emoji + '</span><span class="name">' + reward.name + '</span><span class="date">' + rd.date + '</span></div>';
+          }
+        });
+      }
+
+      content.innerHTML = html;
+      overlay.classList.add('show');
+    }
+
+    function closeShop() {
+      document.getElementById('shopOverlay').classList.remove('show');
+    }
+
+    function redeemReward(rewardId) {
+      const reward = REWARDS.find(r => r.id === rewardId);
+      if (!reward) return;
+      if (getCoins() < reward.cost) {
+        showToast('❌ Not enough coins! Need ' + reward.cost + ' 🪙');
+        return;
+      }
+
+      // Spend coins
+      spendCoins(reward.cost);
+
+      // Record redemption
+      if (!history.redeemedRewards) history.redeemedRewards = [];
+      history.redeemedRewards.push({ id: rewardId, date: getTodayStr(), ts: Date.now() });
+      saveHistory();
+
+      // Effects
+      if (soundEnabled) {
+        playCelebrationSound();
+        setTimeout(() => speakRadio('Reward redeemed! ' + reward.name + '. You earned it Daniel. Enjoy!', { style: 'engineer' }), 300);
+      }
+      showToast('🎉 Redeemed: ' + reward.emoji + ' ' + reward.name + '!');
+
+      // Refresh shop
+      openShop();
+    }
+
     // ===== RACE ENGINEER VOICE (Speech Synthesis) =====
     let voicesReady = false;
     let voiceMap = {};
@@ -3100,6 +3490,8 @@
               }
             }
             s.bestStreak = Math.max(s.bestStreak || 0, s.streak || 0);
+            // Streak coin bonuses
+            checkStreakCoinBonus(s.streak);
             s.checked = {};
             s.lastResetDate = getTodayStr();
             s.celebrationShown = false;
@@ -3231,6 +3623,7 @@
       renderBadges();
       renderGarage();
       renderMilestones();
+      updateCoinDisplays();
     }
 
     function updateF1Lights() {
@@ -3332,6 +3725,7 @@
         }
 
         addXp(xp);
+        earnCoinsForTask(event); // +1 coin per task
         spawnParticles(event.clientX, event.clientY);
         spawnXpPopup(event.clientX, event.clientY, xp);
         spawnRadioConfirm(event.clientX, event.clientY);
@@ -3349,6 +3743,7 @@
           const sectionDone = section.items.every(i => state.checked[i.id]);
           if (sectionDone && !sectionCompleteShown[sectionId]) {
             sectionCompleteShown[sectionId] = true;
+            earnCoinsForSection(sectionId); // +5 coins for section
             setTimeout(() => showBoxBox(section.title), 400);
           }
         }
@@ -3378,6 +3773,7 @@
 
       if (allDone && !state.celebrationShown) {
         state.celebrationShown = true;
+        earnCoinsForPerfectDay(); // +25 coins for 100% day
         saveState();
         setTimeout(() => showCelebration(), 800);
       }
