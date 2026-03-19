@@ -49,7 +49,16 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      min-height: 100dvh;
       overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      touch-action: manipulation;
+    }
+
+    html {
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
     }
 
     /* === ROAD / ASPHALT BACKGROUND === */
@@ -112,6 +121,7 @@
         linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.02) 75%);
       background-size: 4px 4px;
       pointer-events: none; z-index: 0;
+      touch-action: none;
     }
 
     .app {
@@ -1107,6 +1117,22 @@
       .speedo-svg { width: 170px; height: 100px; }
       .speedo-value { font-size: 30px; }
       .box-box-text { font-size: 36px; }
+    }
+
+    /* Android scroll fix — ensure decorative layers never block touch */
+    @supports (-webkit-touch-callout: none) or (touch-action: manipulation) {
+      body::before, body::after,
+      .underglow-left, .underglow-right,
+      .carbon-overlay {
+        pointer-events: none !important;
+        touch-action: none !important;
+      }
+    }
+
+    /* Fix for Android Chrome address bar height */
+    @supports (min-height: 100dvh) {
+      body { min-height: 100dvh; }
+      .celebration, .box-box-overlay { min-height: 100dvh; }
     }
 
     /* === DRIVER RADIO POPUP === */
