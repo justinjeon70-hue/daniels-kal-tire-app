@@ -1,0 +1,20 @@
+{
+  "name": "Daniel's Kal Tire Thriving Plan",
+  "short_name": "Kal Tire",
+  "description": "F1-themed daily habit tracker - CarbonForgeX Racing Division",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "categories": ["productivity", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -10,7 +10,8 @@
   <meta name="apple-mobile-web-app-title" content="Kal Tire">
   <meta name="theme-color" content="#0a0a0f">
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0f'/><text x='50' y='62' text-anchor='middle' font-size='50'>🏎️</text></svg>">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Orbitron:wght@500;600;700;800;900&family=Racing+Sans+One&display=swap" rel="stylesheet">
   <style>
@@ -1805,8 +1806,13 @@
       </div>
     </div>
 
+    <!-- Calendar Sync -->
+    <div class="reset-section" style="padding-bottom:8px">
+      <button class="reset-btn" style="border-color:var(--green);color:var(--green)" onclick="syncToCalendar()">&#128197; Sync Tasks to Calendar</button>
+    </div>
+
     <!-- Reset -->
-    <div class="reset-section">
+    <div class="reset-section" style="padding-top:8px">
       <button class="reset-btn" onclick="resetDay()">Reset Today's Lap</button>
     </div>
 
@@ -3512,6 +3518,98 @@
       btn.textContent = soundEnabled ? '\u{1F50A}' : '\u{1F507}';
       btn.classList.toggle('muted', !soundEnabled);
       if (soundEnabled) playCheckBeep();
+    }
+
+    // ===== CALENDAR SYNC (.ics generation) =====
+    function syncToCalendar() {
+      const today = new Date();
+      const dateStr = today.toISOString().split('T')[0].replace(/-/g, '');
+      const allItems = getAllItems();
+
+      // Build calendar events for tasks with times
+      const timedTasks = [
+        { label: 'Wake up on time', hour: 6, min: 30 },
+        { label: 'Leave 15 min early for work', hour: 7, min: 15 },
+        { label: 'Screens off by 10:30 PM', hour: 22, min: 30 },
+        { label: 'In bed by 11:00 PM', hour: 23, min: 0 },
+      ];
+
+      // Morning block
+      const blocks = [
+        { name: 'Morning Launch Sequence', start: '063000', end: '073000', desc: 'Wake up, breakfast, prep, leave early' },
+        { name: 'Kal Tire Shift - DOMINATE', start: '073000', end: '163000', desc: 'Arrive early, zero phone, volunteer, learn, clean bay, be grateful' },
+        { name: 'Body Maintenance - Pit Stop', start: '170000', end: '180000', desc: '30 min workout + stretching + hydration' },
+        { name: 'Evening Wind-Down - Cooldown Lap', start: '200000', end: '223000', desc: 'Prep tomorrow, review schedule, screens off by 10:30' },
+        { name: 'ADHD Power Moves - DRS Zone', start: '183000', end: '200000', desc: 'Pomodoro timer, write 3 tasks, take breaks, CarbonForgeX time' },
+      ];
+
+      // Build .ics content
+      let ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//CarbonForgeX//Kal Tire Plan//EN\r\nCALSCALE:GREGORIAN\r\nMETHOD:PUBLISH\r\nX-WR-CALNAME:Kal Tire Plan\r\n';
+
+      blocks.forEach(block => {
+        const uid = 'kaltire-' + block.name.replace(/[^a-z]/gi, '') + '-' + dateStr + '@carbonforgeX';
+        ics += 'BEGIN:VEVENT\r\n';
+        ics += 'UID:' + uid + '\r\n';
+        ics += 'DTSTART:' + dateStr + 'T' + block.start + '\r\n';
+        ics += 'DTEND:' + dateStr + 'T' + block.end + '\r\n';
+        ics += 'SUMMARY:' + block.name + '\r\n';
+        ics += 'DESCRIPTION:' + block.desc + '\r\n';
+        ics += 'STATUS:CONFIRMED\r\n';
+
+        // Alarm 10 min before
+        ics += 'BEGIN:VALARM\r\n';
+        ics += 'TRIGGER:-PT10M\r\n';
+        ics += 'ACTION:DISPLAY\r\n';
+        ics += 'DESCRIPTION:' + block.name + ' starting soon!\r\n';
+        ics += 'END:VALARM\r\n';
+
+        ics += 'END:VEVENT\r\n';
+      });
+
+      // Add individual reminders for key times
+      timedTasks.forEach(task => {
+        const h = task.hour.toString().padStart(2, '0');
+        const m = task.min.toString().padStart(2, '0');
+        const uid = 'kaltire-reminder-' + h + m + '-' + dateStr + '@carbonforgeX';
+        ics += 'BEGIN:VEVENT\r\n';
+        ics += 'UID:' + uid + '\r\n';
+        ics += 'DTSTART:' + dateStr + 'T' + h + m + '00\r\n';
+        ics += 'DTEND:' + dateStr + 'T' + h + m + '00\r\n';
+        ics += 'SUMMARY:' + task.label + '\r\n';
+        ics += 'DESCRIPTION:CarbonForgeX Racing - Kal Tire Thriving Plan\r\n';
+        ics += 'BEGIN:VALARM\r\n';
+        ics += 'TRIGGER:PT0M\r\n';
+        ics += 'ACTION:DISPLAY\r\n';
+        ics += 'DESCRIPTION:' + task.label + '\r\n';
+        ics += 'END:VALARM\r\n';
+        ics += 'END:VEVENT\r\n';
+      });
+
+      ics += 'END:VCALENDAR\r\n';
+
+      // Download the .ics file (iPhone will prompt to add to Calendar)
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'kal-tire-plan-' + dateStr + '.ics';
+      a.click();
+      URL.revokeObjectURL(url);
+
+      showToast('\u{1F4C5} Calendar file downloaded! Open it to add events.');
+      if (soundEnabled) {
+        playCheckBeep();
+        setTimeout(() => speakRadio('Calendar synced Daniel. All task blocks added to your schedule. Stay on strategy.', { style: 'engineer' }), 300);
+      }
+    }
+
+    // ===== SERVICE WORKER REGISTRATION =====
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').then(reg => {
+        console.log('Service worker registered:', reg.scope);
+      }).catch(err => {
+        console.log('SW registration failed:', err);
+      });
     }
 
     // ===== INIT =====
